@@ -1,0 +1,14 @@
+{
+  "name": "conway-soldiers-infinite",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Conway's Soldiers on an infinite board, served locally without dependencies.",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node game.test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

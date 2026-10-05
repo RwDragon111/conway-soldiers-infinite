@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fafbfc">
+  <title>Солдаты Конвея · Бесконечное поле</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <header class="page-header">
+    <div>
+      <h1>Солдаты Конвея<span class="infinity" aria-label="Бесконечное поле">∞</span></h1>
+      <p>Те же правила. Поле без границ.</p>
+    </div>
+    <div class="mode-switch" role="group" aria-label="Режим">
+      <button id="play-mode" aria-pressed="true">Игра</button>
+      <button id="edit-mode" aria-pressed="false">Редактор</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="board-panel" aria-label="Игровое поле">
+      <div class="board-toolbar">
+        <div class="history-buttons">
+          <button id="undo" title="Ctrl+Z" disabled>Отменить</button>
+          <button id="redo" title="Ctrl+Shift+Z" disabled>Повторить</button>
+        </div>
+        <label class="line-toggle"><input id="show-line" type="checkbox" checked> Стартовая линия</label>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="board" tabindex="0" role="application" aria-label="Бесконечное поле. Стрелки выбирают клетку; Enter выполняет действие." aria-describedby="keyboard-help">
+          Для игры нужен браузер с поддержкой Canvas и JavaScript.
+        </canvas>
+        <div class="canvas-caption" aria-hidden="true">СЕВЕР ↑</div>
+      </div>
+      <div class="board-footer">
+        <output id="coordinates" aria-label="Координаты клетки">x: 0 · y: 0</output>
+        <div class="view-controls" role="group" aria-label="Масштаб и положение поля">
+          <button id="zoom-out" aria-label="Уменьшить масштаб" title="Уменьшить масштаб">−</button>
+          <output id="zoom-value" aria-label="Масштаб">100%</output>
+          <button id="zoom-in" aria-label="Увеличить масштаб" title="Увеличить масштаб">+</button>
+          <button id="center" title="Вернуться к стартовой линии">К старту</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="statistics" aria-label="Статистика партии">
+        <div><span>Ходы</span><output id="moves">0</output></div>
+        <div><span>Выше линии</span><output id="height">0</output></div>
+        <div><span>Солдаты</span><output id="soldiers" aria-label="Бесконечно много солдат">∞</output></div>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite">Выберите солдата, чтобы увидеть доступные ходы.</p>
+
+      <div class="setup-actions">
+        <button id="update-line">Обновить линию</button>
+        <button id="reset">Начать заново</button>
+        <button id="clear" class="quiet-button">Очистить поле</button>
+      </div>
+
+      <details class="instructions" open>
+        <summary>Как играть</summary>
+        <p>Доберитесь как можно выше стартовой линии.</p>
+        <ol>
+          <li>Выберите синего солдата.</li>
+          <li>Прыгните через соседнего на пустую клетку. Возможные ходы отмечены кольцами.</li>
+          <li>Перепрыгнутый солдат исчезнет. Прыгать можно в четырёх направлениях, без диагоналей.</li>
+        </ol>
+        <p class="edit-help">В <b>редакторе</b> щёлкните по клетке, чтобы добавить или убрать солдата. После расстановки можно обновить стартовую линию.</p>
+      </details>
+
+      <details class="navigation-help">
+        <summary>Управление полем</summary>
+        <p>Перетаскивайте поле мышью или пальцем. Колесо мыши меняет масштаб, два пальца приближают и отдаляют.</p>
+        <p id="keyboard-help">Стрелки выбирают клетку. Enter или пробел: выбрать солдата, сделать ход или изменить клетку. Escape снимает выделение. Ctrl+Z отменяет действие, Ctrl+Shift+Z повторяет.</p>
+      </details>
+      <p class="infinite-note">Нижняя половина поля заполнена солдатами до бесконечности. Очистите поле для своей расстановки.</p>
+      <a class="reference" href="https://abhikpal.gitlab.io/conway-soldiers/" target="_blank" rel="noreferrer">По мотивам Conway’s Soldiers ↗</a>
+    </aside>
+  </main>
+  <noscript>Включите JavaScript, чтобы играть.</noscript>
+</body>
+</html>
